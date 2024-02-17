@@ -1,0 +1,106 @@
+[
+  {
+    "_id": "u103",
+    "fullname": "Puki Ja",
+    "username": "buki",
+    "password": "buki1234",
+    "score": 300
+  },
+  {
+    "_id": "u104",
+    "fullname": "Ruki no",
+    "username": "ruki",
+    "password": "ruki1234",
+    "score": 400
+  },
+  {
+    "_id": "kM5j2Y",
+    "fullname": "Muki Ja",
+    "username": "muki",
+    "password": "muki12345",
+    "score": 878
+  },
+  {
+    "_id": "WOg3YT"
+  },
+  {
+    "username": "yuval",
+    "password": "$2b$10$THzKpLM45phqIPOR2H19veszaS63FNdF.BxVboe2Y5MQwVfwWP996",
+    "isAdmin": true,
+    "fullname": "Yuval Neumann",
+    "_id": "VIuipr"
+  },
+  {
+    "username": "yuval1",
+    "password": "$2b$10$NjBDd6tOQf0T0iqqG3IyO.Yv.WtWPzvUhyDVHkTWaLy8y15V1jsGK",
+    "fullname": "Yuval Neumann1",
+    "_id": "CHuhPN",
+    "score": 10000,
+    "createdAt": 1708085947454,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+  },
+  {
+    "username": "yuval2",
+    "password": "$2b$10$V.XMNkgXBLABoRdrEXJqa.4MSyh/32LSiiI1cjuJ.W2XDz.2Bj5rG",
+    "fullname": "Yuval Neumann2",
+    "_id": "s4HtzI",
+    "score": 10000,
+    "createdAt": 1708120789260,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+  },
+  {
+    "username": "yuval3",
+    "password": "$2b$10$LVVOPDlsFR2LmxQueLeN2e4Vp2bdiRRPCI090ZJEhEzK2fOIaz0Yu",
+    "fullname": "Yuval Neumann3",
+    "_id": "62b3Jl",
+    "score": 10000,
+    "createdAt": 1708120916393,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+  },
+  {
+    "username": "yuval4",
+    "password": "$2b$10$kVuxw8cHPX7yClGKGa41OOzi/SAb9PhdYPXaVyDSDHFxtOCt1njze",
+    "fullname": "Yuval Neumann4",
+    "_id": "xYda3R",
+    "score": 10000,
+    "createdAt": 1708120991974,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+  },
+  {
+    "username": "yuval5",
+    "password": "$2b$10$yvebJvV3IyV.zrMMjvAw8.rSYFmPWF6HGoiWQEBk2UYYc9cDVDBoq",
+    "fullname": "Yuval Neumann5",
+    "_id": "q6Irxr",
+    "score": 10000,
+    "createdAt": 1708173573385,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+  },
+  {
+    "username": "yuval6",
+    "password": "$2b$10$BIo0gz60nQNALP.SmY7MwO9XzrpMPczLyBZLWrmdhk853QgOAvPlK",
+    "fullname": "Yuval Neumann6",
+    "_id": "UPcQUR",
+    "score": 10000,
+    "createdAt": 1708186581240,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+  },
+  {
+    "username": "yuval7",
+    "password": "$2b$10$h7lttVm0mgg3o45kNQuMveH7zFb4l9Ka5meSSMNZQ0krsBG4j1CxC",
+    "fullname": "Yuval Neumann7",
+    "_id": "rG3GAR",
+    "score": 10000,
+    "createdAt": 1708201999327,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+  },
+  {
+    "fullname": "admin",
+    "username": "admin",
+    "password": "1234",
+    "isAdmin": true,
+    "_id": "qi1iKP",
+    "score": 10000,
+    "createdAt": 1708204255781,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+  }
+]
