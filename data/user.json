@@ -99,6 +99,8 @@
     "username": "admin",
     "isAdmin":true,
     "password": "$2b$10$i.bd6B30rUG0z7OVtZMP0e8lOYaIr5O0UhEdSNQynK8dpD0evf136",
-    "score": 123123
+    "score": 123123,
+    "createdAt": 1708201999327,
+    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
   }
 ]
