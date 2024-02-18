@@ -33,8 +33,8 @@ export async function deleteUser(req, res) {
 }
 
 export async function updateUser(req, res) {
-    
-    const { _id, fullname, username, password, score } = req.body
+   
+    const { _id, fullname, username, password, score } = req.body    
     const userToSave = { _id, fullname, username, password, score  }
     try {
         const savedUser = await userService.save(userToSave)

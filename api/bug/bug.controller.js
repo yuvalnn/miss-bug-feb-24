@@ -10,8 +10,7 @@ export async function getPDF(req, res) {
     const filterBy = {
         title: req.body.title || '',
         severity: +req.body.severity || 0
-    }
-    console.log(filterBy)
+    }    
     try {
         const doc = new PDFDocument()
         doc.fontSize(16).text('Bug List', 50, 50)

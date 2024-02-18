@@ -33,21 +33,6 @@
     ]
   },
   {
-    "_id": "IsYwRl",
-    "title": "yuval",
-    "severity": 33,
-    "description": "yuval",
-    "createdAt": "1706905571178",
-    "creator": {
-      "_id": "u103",
-      "fullname": "Puki Ja"
-    },
-    "lables": [
-      "need-CR",
-      "dev-branch"
-    ]
-  },
-  {
     "_id": "YTs32Y",
     "title": "yuval",
     "severity": 13,
@@ -123,18 +108,55 @@
     }
   },
   {
-    "title": "Last Date1",
-    "severity": 555,
-    "description": "yuvalllllllll Hmebulbal777",
-    "createdAt": 1708206545152,
-    "lables": [
-      "critical",
-      "need-CR1",
-      "dev-branch",
-      "yuval",
-      "yuval2"
-    ],
-    "_id": "F0SxzI",
+    "title": "new fit - update bug title",
+    "severity": 10,
+    "description": "update title from bug list",
+    "createdAt": 1708283171559,
+    "_id": "EjEJT2",
+    "creator": {
+      "_id": "G8aHsR",
+      "fullname": "admin"
+    }
+  },
+  {
+    "title": "new fit- add new page bug edit",
+    "severity": 10,
+    "description": "Ne page",
+    "createdAt": 1708283201518,
+    "_id": "fz9SPK",
+    "creator": {
+      "_id": "G8aHsR",
+      "fullname": "admin"
+    }
+  },
+  {
+    "title": "new fit - add sort by to the fronted",
+    "severity": 10,
+    "description": "sort by",
+    "createdAt": 1708283250480,
+    "_id": "AHSm7f",
+    "creator": {
+      "_id": "G8aHsR",
+      "fullname": "admin"
+    }
+  },
+  {
+    "title": "no matter where I'm after logout - go to home page",
+    "severity": 10,
+    "description": "Logout treatmentgo to home page ",
+    "createdAt": 1708283417369,
+    "_id": "JwcNbg",
+    "creator": {
+      "_id": "rG3GAR",
+      "fullname": "Yuval Neumann7"
+    }
+  },
+  {
+    "title": "new fit - orgnaize css of users page",
+    "severity": 10,
+    "description": "none",
+    "createdAt": 1708283479422,
+    "_id": "jNdQ2q",
     "creator": {
       "_id": "rG3GAR",
       "fullname": "Yuval Neumann7"

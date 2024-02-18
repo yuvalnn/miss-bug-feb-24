@@ -66,6 +66,7 @@ async function query(filterBy = {}) {
 async function getById(bugId, loggedinUser) {
     try {
         const bug = bugs.find(bug => bug._id === bugId)          
+        console.log(loggedinUser)
         if (!loggedinUser?.isAdmin && bug.creator._id !== loggedinUser?._id) throw `Not your bug`
         return bug
     } catch (err) {

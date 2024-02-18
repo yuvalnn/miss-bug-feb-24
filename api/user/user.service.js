@@ -29,8 +29,7 @@ async function getByUsername(username) {
     return user
 }
 
-async function getById(userId) {
-    console.log(userId)
+async function getById(userId) {    
     try {
         const user = users.find(user => user._id === userId)
         if (!user) throw `User not found by userId : ${userId}`

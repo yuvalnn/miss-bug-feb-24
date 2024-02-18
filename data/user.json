@@ -2,9 +2,9 @@
   {
     "_id": "u103",
     "fullname": "Puki Ja",
-    "username": "buki",
+    "username": "yuvi Pa",
     "password": "buki1234",
-    "score": 300
+    "score": 500
   },
   {
     "_id": "u104",
@@ -94,13 +94,11 @@
     "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
   },
   {
+    "_id": "G8aHsR",
     "fullname": "admin",
     "username": "admin",
-    "password": "1234",
-    "isAdmin": true,
-    "_id": "qi1iKP",
-    "score": 10000,
-    "createdAt": 1708204255781,
-    "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+    "isAdmin":true,
+    "password": "$2b$10$i.bd6B30rUG0z7OVtZMP0e8lOYaIr5O0UhEdSNQynK8dpD0evf136",
+    "score": 123123
   }
 ]
