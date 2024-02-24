@@ -1,4 +1,7 @@
 import fs from 'fs'
+import { dbService } from '../../services/db.service.js';
+import { ObjectId } from 'mongodb'
+
 
 import { loggerService } from '../../services/logger.service.js'
 export const bugService = {
@@ -9,54 +12,74 @@ export const bugService = {
 }
 
 var bugs = _readJsonFile('./data/bug.json')
+const collectionName = 'bug'
 const PAGE_SIZE = 4
 
 async function query(filterBy = {}) {
     try {
-
-        let bugsToReturn = [...bugs]
+        const criteria = _buildCriteria(filterBy)
+        const sortBy = _buildSortBy(filterBy)
+        // let bugsToReturn = [...bugs]
+        const collection = await dbService.getCollection(collectionName)
+        // const bugCursor = await collection.find(criteria, sortBy)
         
-        if (filterBy.title) {
-            const regExp = new RegExp(filterBy.title, 'i')
-            bugsToReturn = bugsToReturn.filter(bug => regExp.test(bug.title))
-        }
 
-        if (filterBy.severity) {
-            bugsToReturn = bugsToReturn.filter(bug => bug.severity >= +filterBy.severity)
-        }
-
-        if (filterBy.pageIdx !== undefined) {
+        const bugCursor = await collection.find(criteria).sort(sortBy);
+        if (filterBy.pageIdx !== undefined) {            
             const startIdx = filterBy.pageIdx * PAGE_SIZE
-            bugsToReturn = bugsToReturn.slice(startIdx, startIdx + PAGE_SIZE)
+            bugCursor.skip(startIdx).limit(PAGE_SIZE)
         }
+    
+        const bugs = await bugCursor.toArray()
 
-        if (filterBy.lables && filterBy.lables.length > 0) {
-            bugsToReturn = bugsToReturn.filter(bug => {
-                return filterBy.lables.some(label => bug.lables.includes(label))
-            })
+        // if (filterBy.title) {
 
-        }
+        //     const regExp = new RegExp(filterBy.title, 'i')
+        //     bugsToReturn = bugsToReturn.filter(bug => regExp.test(bug.title))
+        // }
 
-        if (filterBy.sortBy) {
-            bugsToReturn.sort((a, b) => {
-                if (filterBy.sortBy === 'title') {
-                    return a.title.localeCompare(b.title)
-                } else if (filterBy.sortBy === 'severity') {
-                    return (a.severity - b.severity)
-                } else if (filterBy.sortBy === 'createdAt') {
-                    if (a[filterBy.sortBy] < b[filterBy.sortBy]) return -1 * filterBy.sortDir;
-                    if (a[filterBy.sortBy] > b[filterBy.sortBy]) return 1 * filterBy.sortDir;
-                    return 0;
-                }
-            })
+        // if (filterBy.severity) {
 
-        }
+        //     bugsToReturn = bugsToReturn.filter(bug => bug.severity >= +filterBy.severity)
 
-        if (filterBy.userId){            
-            bugsToReturn = bugsToReturn.filter(bug => bug.creator._id === filterBy.userId)                    
-        }
-        
-        return bugsToReturn
+        // }
+
+        // if (filterBy.pageIdx !== undefined) {
+
+        //     const startIdx = filterBy.pageIdx * PAGE_SIZE
+        //     bugsToReturn = bugsToReturn.slice(startIdx, startIdx + PAGE_SIZE)
+        // }
+
+        // if (filterBy.lables && filterBy.lables.length > 0) {
+        //     console.log(bugsToReturn)
+        //     bugsToReturn = bugsToReturn.filter(bug => {
+        //         return filterBy.lables.some(label => bug.lables.includes(label))
+        //     })
+
+        // }
+
+        // if (filterBy.sortBy) {
+
+        //     bugsToReturn.sort((a, b) => {
+        //         if (filterBy.sortBy === 'title') {
+        //             return a.title.localeCompare(b.title)
+        //         } else if (filterBy.sortBy === 'severity') {
+        //             return (a.severity - b.severity)
+        //         } else if (filterBy.sortBy === 'createdAt') {
+        //             if (a[filterBy.sortBy] < b[filterBy.sortBy]) return -1 * filterBy.sortDir;
+        //             if (a[filterBy.sortBy] > b[filterBy.sortBy]) return 1 * filterBy.sortDir;
+        //             return 0;
+        //         }
+        //     })
+
+        // }
+
+        // if (filterBy.userId){            
+        //     bugsToReturn = bugsToReturn.filter(bug => bug.creator._id === filterBy.userId)                    
+        // }
+
+        // return bugsToReturn
+        return bugs
     } catch (err) {
         loggerService.error(`Had problems getting bugs...`)
         throw err
@@ -65,7 +88,11 @@ async function query(filterBy = {}) {
 
 async function getById(bugId, loggedinUser) {
     try {
-        const bug = bugs.find(bug => bug._id === bugId)          
+        console.log(bugId)
+        const collection = await dbService.getCollection(collectionName)
+        // const bug = bugs.find(bug => bug._id === bugId) 
+        const bug = await collection.findOne({ _id: new ObjectId(bugId) })
+        if (!bug) throw `Couldn't find bug with _id ${bugId}`
         console.log(loggedinUser)
         if (!loggedinUser?.isAdmin && bug.creator._id !== loggedinUser?._id) throw `Not your bug`
         return bug
@@ -75,15 +102,16 @@ async function getById(bugId, loggedinUser) {
     }
 }
 
-async function remove(bugId,loggedinUser) {
-
-
+async function remove(bugId, loggedinUser) {
     try {
-        const idx = bugs.findIndex(bug => bug._id === bugId)
-        const bug = bugs[idx]
-        if (!loggedinUser?.isAdmin && bug.creator._id !== loggedinUser?._id) throw `Not your bug`
-        bugs.splice(idx, 1)
-        _saveBugsToFile('./data/bug.json')
+        // const idx = bugs.findIndex(bug => bug._id === bugId)
+        // const bug = bugs[idx]
+        // if (!loggedinUser?.isAdmin && bug.creator._id !== loggedinUser?._id) throw `Not your bug`
+        // bugs.splice(idx, 1)
+        // _saveBugsToFile('./data/bug.json')
+        const collection = await dbService.getCollection(collectionName)
+        const { deletedCount } = await collection.deleteOne({ _id: new ObjectId(bugId) })
+        // return deletedCount
     } catch (err) {
         loggerService.error(`Had problems removing bug ${bugId}...`)
         throw err
@@ -114,9 +142,9 @@ async function save(bugToSave, loggedinUser) {
         loggerService.error(`Had problems saving bug ${bugToSave._id}...`)
         throw err
     }
-    
-     return bugToSave
-    
+
+    return bugToSave
+
 }
 
 function _makeId(length = 6) {
@@ -143,4 +171,40 @@ function _saveBugsToFile(path) {
             resolve()
         })
     })
+}
+
+function _buildCriteria(filterBy) {
+    const criteria = {}
+    if (filterBy.title) {
+        criteria.title = { $regex: filterBy.title, $options: 'i' }
+    }
+    if (filterBy.severity) {
+        criteria.severity = { $gt: filterBy.severity }
+        
+    }   
+    if (filterBy.userId){  
+        criteria['creator._id'] = filterBy.userId;    
+    }  
+    return criteria
+}
+
+
+function _buildSortBy(filterBy) {
+    let sortBy = {}
+    let sortOrder = 1;
+    if (filterBy.sortDir){
+        sortOrder = filterBy.sortDir
+    }
+    if (filterBy.sortBy) {
+        if (filterBy.sortBy === 'title') {
+            sortBy = { 'title': sortOrder }
+        }
+        else if (filterBy.sortBy === 'severity') {
+            sortBy = { 'severity': sortOrder }
+        }
+        else if (filterBy.sortBy === 'createdAt') {
+            sortBy = { 'createdAt': sortOrder }
+        }
+    }
+    return sortBy
 }

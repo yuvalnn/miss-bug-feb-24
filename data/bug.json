@@ -72,7 +72,11 @@
       "_id": "xYda3R",
       "fullname": "Yuval Neumann4"
     },
-    "description": "new"
+    "description": "new",
+    "lables": [
+      "need-CR",
+      "dev-branch"
+    ]
   },
   {
     "title": "When adding a new Bug – add the creator (the loggeinUser)",
@@ -83,7 +87,11 @@
     "creator": {
       "_id": "UPcQUR",
       "fullname": "Yuval Neumann6"
-    }
+    },
+    "lables": [
+      "need-CR",
+      "dev-branch"
+    ]
   },
   {
     "title": "Only the bug's creator can DELETE/UPDATE a bug",
@@ -94,7 +102,11 @@
     "creator": {
       "_id": "UPcQUR",
       "fullname": "Yuval Neumann6"
-    }
+    },
+    "lables": [
+      "need-CR",
+      "dev-branch"
+    ]
   },
   {
     "title": "new bug for check update",
@@ -105,7 +117,11 @@
     "creator": {
       "_id": "rG3GAR",
       "fullname": "Yuval Neumann7"
-    }
+    },
+    "lables": [
+      "need-CR",
+      "dev-branch"
+    ]
   },
   {
     "title": "new fit - update bug title",
@@ -116,7 +132,11 @@
     "creator": {
       "_id": "G8aHsR",
       "fullname": "admin"
-    }
+    },
+    "lables": [
+      "need-CR",
+      "dev-branch"
+    ]
   },
   {
     "title": "new fit- add new page bug edit",
@@ -127,7 +147,11 @@
     "creator": {
       "_id": "G8aHsR",
       "fullname": "admin"
-    }
+    },
+    "lables": [
+      "need-CR",
+      "dev-branch"
+    ]
   },
   {
     "title": "new fit - add sort by to the fronted",
@@ -138,7 +162,11 @@
     "creator": {
       "_id": "G8aHsR",
       "fullname": "admin"
-    }
+    },
+    "lables": [
+      "need-CR",
+      "dev-branch"
+    ]
   },
   {
     "title": "no matter where I'm after logout - go to home page",
@@ -149,7 +177,11 @@
     "creator": {
       "_id": "rG3GAR",
       "fullname": "Yuval Neumann7"
-    }
+    },
+    "lables": [
+      "need-CR",
+      "dev-branch"
+    ]
   },
   {
     "title": "new fit - orgnaize css of users page",
@@ -160,6 +192,10 @@
     "creator": {
       "_id": "rG3GAR",
       "fullname": "Yuval Neumann7"
-    }
+    },
+    "lables": [
+      "need-CR",
+      "dev-branch"
+    ]
   }
 ]

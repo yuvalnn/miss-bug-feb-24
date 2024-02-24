@@ -96,7 +96,7 @@
   {
     "_id": "G8aHsR",
     "fullname": "admin",
-    "username": "adminAdmin",
+    "username": "admin",
     "isAdmin":true,
     "password": "$2b$10$i.bd6B30rUG0z7OVtZMP0e8lOYaIr5O0UhEdSNQynK8dpD0evf136",
     "score": 123123, 
