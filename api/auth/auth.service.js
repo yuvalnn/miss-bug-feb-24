@@ -33,7 +33,7 @@ function validateToken(token) {
 }
 
 async function login(username, password) {
-    
+
     const user = await userService.getByUsername(username)
     if (!user) throw 'Unkown username'
 

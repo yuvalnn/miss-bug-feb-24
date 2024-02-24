@@ -11,6 +11,16 @@ export async function getUser(req, res) {
     }
 }
 
+export async function getByUser(req, res) {
+    try {        
+        const user = await userService.getByUsername(req.params.userName)
+        res.send(user)
+    } catch (err) {
+        loggerService.error('Failed to get user', err)
+        res.status(400).send({ err: 'Failed to get user' })
+    }
+}
+
 export async function getUsers(req, res) {
     try {
         const users = await userService.query()

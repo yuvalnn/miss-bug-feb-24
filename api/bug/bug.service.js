@@ -6,7 +6,8 @@ import { ObjectId } from 'mongodb'
 import { loggerService } from '../../services/logger.service.js'
 export const bugService = {
     query,
-    save,
+    add,
+    update,
     getById,
     remove
 }
@@ -119,33 +120,65 @@ async function remove(bugId, loggedinUser) {
 
     return `Bug ${bugId} removed`
 }
-
-async function save(bugToSave, loggedinUser) {
+async function add(bugToSave, loggedinUser) {
     try {
-        if (bugToSave._id) {
-            const idx = bugs.findIndex(bug => bug._id === bugToSave._id)
-            if (idx === -1) throw `Couldn't find bug with _id ${bugToSave._id}`
-
-            const bug = bugs[idx]
-            if (!loggedinUser?.isAdmin && bug.creator._id !== loggedinUser?._id) throw `Not your bug`
-
-            bugs.splice(idx, 1, { ...bug, ...bugToSave })
-            bugToSave = { ...bug, ...bugToSave }
-        } else {
-            bugToSave._id = _makeId()
-            bugToSave.creator = { _id: loggedinUser._id, fullname: loggedinUser.fullname }
-            bugToSave.createdAt = Date.now()
-            bugs.push(bugToSave)
-        }
-        _saveBugsToFile('./data/bug.json')
+        console.log(loggedinUser)
+        bugToSave.creator ={_id: new ObjectId(loggedinUser._id), fullname: loggedinUser.fullname}
+        bugToSave.createdAt = Date.now()        
+        // bugToSave.creator = loggedinUser
+        const collection = await dbService.getCollection(collectionName)
+        await collection.insertOne(bugToSave)
+        return bugToSave
     } catch (err) {
-        loggerService.error(`Had problems saving bug ${bugToSave._id}...`)
+        loggerService.error('bugService, can not add bug : ' + err)
         throw err
     }
-
-    return bugToSave
-
 }
+
+async function update(bug) {
+    try {
+        // Peek only updateable fields
+        const bugToSave = {
+            title: bug.title,
+            severity: bug.severity,
+            description: bug.description
+        }
+        const collection = await dbService.getCollection(collectionName)
+        const res = await collection.updateOne({ _id: new ObjectId(bug._id) }, { $set: bugToSave })
+        console.log('res', res)
+        if(res.modifiedCount < 1) throw 'Could not update bug'
+        return bug
+    } catch (err) {
+        loggerService.error(`cannot update bug ${bug._id}`, err)
+        throw err
+    }
+}
+// async function save(bugToSave, loggedinUser) {
+//     try {
+//         if (bugToSave._id) {
+//             const idx = bugs.findIndex(bug => bug._id === bugToSave._id)
+//             if (idx === -1) throw `Couldn't find bug with _id ${bugToSave._id}`
+
+//             const bug = bugs[idx]
+//             if (!loggedinUser?.isAdmin && bug.creator._id !== loggedinUser?._id) throw `Not your bug`
+
+//             bugs.splice(idx, 1, { ...bug, ...bugToSave })
+//             bugToSave = { ...bug, ...bugToSave }
+//         } else {
+//             bugToSave._id = _makeId()
+//             bugToSave.creator = { _id: loggedinUser._id, fullname: loggedinUser.fullname }
+//             bugToSave.createdAt = Date.now()
+//             bugs.push(bugToSave)
+//         }
+//         _saveBugsToFile('./data/bug.json')
+//     } catch (err) {
+//         loggerService.error(`Had problems saving bug ${bugToSave._id}...`)
+//         throw err
+//     }
+
+//     return bugToSave
+
+// }
 
 function _makeId(length = 6) {
     var txt = ''

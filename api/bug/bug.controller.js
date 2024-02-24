@@ -55,7 +55,7 @@ export async function addBug(req, res) {
     const bugToSave = { title, severity: +severity, description, createdAt, lables }
 
     try {
-        const savedBug = await bugService.save(bugToSave, req.loggedinUser)
+        const savedBug = await bugService.add(bugToSave, req.loggedinUser)
         res.send(savedBug)
     } catch (err) {
         console.log(err)
@@ -66,9 +66,7 @@ export async function updateBug(req, res) {
     const { _id, title, severity, description, lables } = req.body
     const bugToSave = { _id, title, severity: +severity, description, lables }
     try {
-        console.log(req.loggedinUser)
-        console.log(bugToSave)
-        const savedBug = await bugService.save(bugToSave, req.loggedinUser)
+        const savedBug = await bugService.update(bugToSave, req.loggedinUser)
         res.send(savedBug)
     } catch (err) {
         res.status(400).send(`Couldn't save bug ${err}`)
