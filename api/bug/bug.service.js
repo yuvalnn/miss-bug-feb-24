@@ -135,7 +135,7 @@ async function add(bugToSave, loggedinUser) {
     }
 }
 
-async function update(bug) {
+async function update(bug, loggedinUser) {
     try {
         // Peek only updateable fields
         const bugToSave = {
@@ -143,7 +143,11 @@ async function update(bug) {
             severity: bug.severity,
             description: bug.description
         }
-        const collection = await dbService.getCollection(collectionName)
+        const collection = await dbService.getCollection(collectionName)        
+        const originBug = await collection.findOne({ _id: new ObjectId(bug._id) })        
+        if (!originBug) throw `Couldn't find bug with _id ${bug._id}`
+
+        if (!loggedinUser?.isAdmin && new ObjectId(originBug.creator._id).toString() !== loggedinUser?._id) throw `Not your bug`
         const res = await collection.updateOne({ _id: new ObjectId(bug._id) }, { $set: bugToSave })
         console.log('res', res)
         if(res.modifiedCount < 1) throw 'Could not update bug'
