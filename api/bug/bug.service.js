@@ -12,7 +12,7 @@ export const bugService = {
     remove
 }
 
-var bugs = _readJsonFile('./data/bug.json')
+// var bugs = _readJsonFile('./data/bug.json')
 const collectionName = 'bug'
 const PAGE_SIZE = 4
 
@@ -24,7 +24,7 @@ async function query(filterBy = {}) {
         const collection = await dbService.getCollection(collectionName)
         // const bugCursor = await collection.find(criteria, sortBy)
         
-
+        console.log(criteria)
         const bugCursor = await collection.find(criteria).sort(sortBy);
         if (filterBy.pageIdx !== undefined) {            
             const startIdx = filterBy.pageIdx * PAGE_SIZE
@@ -89,13 +89,16 @@ async function query(filterBy = {}) {
 
 async function getById(bugId, loggedinUser) {
     try {
-        console.log(bugId)
+        console.log('Whereeee', bugId)
+        console.log('log',loggedinUser)
         const collection = await dbService.getCollection(collectionName)
         // const bug = bugs.find(bug => bug._id === bugId) 
+
         const bug = await collection.findOne({ _id: new ObjectId(bugId) })
+        
         if (!bug) throw `Couldn't find bug with _id ${bugId}`
-        console.log(loggedinUser)
-        if (!loggedinUser?.isAdmin && bug.creator._id !== loggedinUser?._id) throw `Not your bug`
+        console.log('here1')
+        // if (!loggedinUser?.isAdmin && bug.creator._id !== loggedinUser?._id) throw `Not your bug`
         return bug
     } catch (err) {
         loggerService.error(`Had problems getting bug ${bugId}...`)
@@ -220,7 +223,11 @@ function _buildCriteria(filterBy) {
         
     }   
     if (filterBy.userId){  
-        criteria['creator._id'] = filterBy.userId;    
+        console.log('hi', filterBy.userId)
+        // if (filterBy.byUserId) criteria.byUserId = new ObjectId(filterBy.byUserId)
+        // criteria['creator._id'] = filterBy.userId;    
+        criteria['creator._id'] = new ObjectId(filterBy.userId)
+        console.log(criteria)
     }  
     return criteria
 }

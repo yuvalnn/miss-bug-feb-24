@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "set PORT=3031 & nodemon --ignore \"./data\" server.js",
+    "dev": "set PORT=3031 & set NODE_ENV=development & nodemon --ignore \"./data\" server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,5 +22,8 @@
     "mongodb": "^6.3.0",
     "nodemon": "^3.0.3",
     "pdfkit": "^0.14.0"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^4.0.7"
   }
 }
